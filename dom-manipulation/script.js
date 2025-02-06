@@ -14,8 +14,8 @@ function showRandomQuote() {
     newQuoteCategory.id = "newQuoteCategory";
 
     const btn = document.createElement("button");
-    btn.innerText = "Add Quote";
-    btn.onclick = addQuote; 
+    btn.innerHTML = "Add Quote";
+    // btn.onclick = addQuote; 
 
     container.appendChild(newQuoteText);
     container.appendChild(newQuoteCategory);
