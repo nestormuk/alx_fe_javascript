@@ -4,10 +4,12 @@ function showRandomQuote() {
     document.body.appendChild(container);
 
     const newQuoteText = document.createElement("input");
+    newQuoteText.setAttribute("type", "text");
     newQuoteText.placeholder = "Enter a new quote";
     newQuoteText.id = "newQuoteText";
 
     const newQuoteCategory = document.createElement("input");
+    newQuoteCategory.setAttribute("type", "text");
     newQuoteCategory.placeholder = "Enter quote category";
     newQuoteCategory.id = "newQuoteCategory";
 
