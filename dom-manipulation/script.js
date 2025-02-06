@@ -53,22 +53,31 @@ function addQuote() {
 }
 
 function exportToJsonFile() {
-  const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(quotes));
+  const blob = new Blob([JSON.stringify(quotes, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
   const downloadAnchor = document.createElement("a");
-  downloadAnchor.setAttribute("href", dataStr);
+  downloadAnchor.setAttribute("href", url);
   downloadAnchor.setAttribute("download", "quotes.json");
   document.body.appendChild(downloadAnchor);
   downloadAnchor.click();
-  downloadAnchor.remove();
+  document.body.removeChild(downloadAnchor);
 }
 
 function importFromJsonFile(event) {
   const fileReader = new FileReader();
   fileReader.onload = function(event) {
-      const importedQuotes = JSON.parse(event.target.result);
-      quotes.push(...importedQuotes);
-      localStorage.setItem("quotes", JSON.stringify(quotes));
-      alert("Quotes imported successfully!");
+      try {
+          const importedQuotes = JSON.parse(event.target.result);
+          if (Array.isArray(importedQuotes)) {
+              quotes.push(...importedQuotes);
+              localStorage.setItem("quotes", JSON.stringify(quotes));
+              alert("Quotes imported successfully!");
+          } else {
+              alert("Invalid file format. Please upload a valid JSON file.");
+          }
+      } catch (error) {
+          alert("Error parsing JSON file.");
+      }
   };
   fileReader.readAsText(event.target.files[0]);
 }
