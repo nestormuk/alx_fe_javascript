@@ -18,14 +18,39 @@ const quotes = [
     quoteDisplay.innerHTML = `<p><strong>${quote.category}:</strong> "${quote.text}"</p>`;
   }
   
+  function createAddQuoteForm() {
+    const container = document.createElement("div");
+    document.body.appendChild(container);
+
+    const newQuoteText = document.createElement("input");
+    newQuoteText.setAttribute("type", "text");
+    newQuoteText.placeholder = "Enter a new quote";
+    newQuoteText.id = "newQuoteText";
+
+    const newQuoteCategory = document.createElement("input");
+    newQuoteCategory.setAttribute("type", "text");
+    newQuoteCategory.placeholder = "Enter quote category";
+    newQuoteCategory.id = "newQuoteCategory";
+
+    const btn = document.createElement("button");
+    btn.innerHTML = "Add Quote";
+    btn.onclick = addQuote; 
+
+    container.appendChild(newQuoteText);
+    container.appendChild(newQuoteCategory);
+    container.appendChild(btn);
+}
+createAddQuoteForm();
+
+
   // Attach an event listener to the button to show a new quote when clicked
   document.getElementById("newQuote").addEventListener("click", showRandomQuote);
   
   // Function to add a new quote dynamically
   function addQuote() {
     // Get input values from the text fields
-    const newQuoteText = document.getElementById("newQuoteText").value.trim();
-    const newQuoteCategory = document.getElementById("newQuoteCategory").value.trim();
+    newQuoteText = document.getElementById("newQuoteText").value.trim();
+    newQuoteCategory = document.getElementById("newQuoteCategory").value.trim();
   
     // Validate inputs to ensure both fields are filled
     if (newQuoteText === "" || newQuoteCategory === "") {
