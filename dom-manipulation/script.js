@@ -79,6 +79,7 @@ function resolveConflicts(serverQuotes, localQuotes) {
 function showConflictNotification(conflicts) {
   const conflictMessage = "Conflicts detected. Server data has been applied. Click to review.";
   showNotification(conflictMessage);
+  alert('Quotes synced with server!');
   document.getElementById("notification").onclick = () => displayConflictResolution(conflicts);
 }
 
