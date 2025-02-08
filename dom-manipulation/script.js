@@ -45,7 +45,7 @@ async function postQuoteToServer(quote) {
   }
 }
 
-async function syncData() {
+async function syncQuotes() {
   const serverQuotes = await fetchQuotesFromServer();
   const localQuotes = JSON.parse(localStorage.getItem("quotes")) || [];
   const mergedQuotes = resolveConflicts(serverQuotes, localQuotes);
@@ -120,7 +120,7 @@ function resolveManually(index, choice) {
 }
 
 function startSync() {
-  setInterval(syncData, 10000);
+  setInterval(syncQuotes, 10000);
 }
 
 document.getElementById("newQuote").addEventListener("click", showRandomQuote);
