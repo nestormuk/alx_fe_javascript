@@ -28,6 +28,23 @@ async function fetchQuotesFromServer() {
   }
 }
 
+async function postQuoteToServer(quote) {
+  try {
+    const response = await fetch(SERVER_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(quote)
+    });
+    const data = await response.json();
+    showNotification("Quote successfully posted to server.");
+    return data;
+  } catch (error) {
+    showNotification("Failed to post quote to server.", true);
+  }
+}
+
 async function syncData() {
   const serverQuotes = await fetchQuotesFromServer();
   const localQuotes = JSON.parse(localStorage.getItem("quotes")) || [];
